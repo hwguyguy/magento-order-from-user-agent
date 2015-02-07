@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<config>
+	<modules>
+		<Hwguyguy_OrderFromUserAgent>
+			<version>0.1.0</version>
+		</Hwguyguy_OrderFromUserAgent>
+	</modules>
+	<global>
+		<helpers>
+			<hwguyguy_orderfromuseragent>
+				<class>Hwguyguy_OrderFromUserAgent_Helper</class>
+			</hwguyguy_orderfromuseragent>
+		</helpers>
+		<models>
+			<hwguyguy_orderfromuseragent>
+				<class>Hwguyguy_OrderFromUserAgent_Model</class>
+			</hwguyguy_orderfromuseragent>
+		</models>
+
+		<resources>
+			<hwguyguy_orderfromuseragent_setup>
+				<setup>
+					<module>Hwguyguy_OrderFromUserAgent</module>
+					<class>Mage_Sales_Model_Mysql4_Setup</class>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</hwguyguy_orderfromuseragent_setup>
+			<hwguyguy_orderfromuseragent_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</hwguyguy_orderfromuseragent_write>
+			<hwguyguy_orderfromuseragent_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</hwguyguy_orderfromuseragent_read>
+		</resources>
+
+		<fieldsets>
+			<sales_convert_quote>
+				<from_user_agent><to_order>*</to_order></from_user_agent>
+			</sales_convert_quote>
+
+			<sales_convert_order>
+				<from_user_agent><to_quote>*</to_quote></from_user_agent>
+			</sales_convert_order>
+		</fieldsets>
+
+		<events>
+			<checkout_type_onepage_save_order>
+				<observers>
+					<from_user_agent_observer>
+						<type>singleton</type>
+						<class>hwguyguy_orderfromuseragent/observer</class>
+						<method>saveCustomData</method>
+					</from_user_agent_observer>
+				</observers>
+			</checkout_type_onepage_save_order>
+		</events>
+	</global>
+</config>
